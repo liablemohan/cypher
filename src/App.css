@@ -1,38 +1,218 @@
-.App {
-  text-align: center;
-}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;500&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+body{
+  margin: 0;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(35deg,#6BEBE4 35%, #C4E6E7 45%, #90CAEB 55%, #FFEFE5 100%);
 }
 
-.App-link {
-  color: #61dafb;
+
+.App {
+  height: 100vh;
+  width: 100%; 
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.heading{
+  font-family: 'Montserrat', sans-serif;
+  font-size: 100px;
+  text-align: center;
+  color: black;
+}
+
+h1{
+  background:linear-gradient(
+    to right,
+    #7953cd 20%,
+    #00affa 30%,
+    #6501de 70%,
+    #ff5770 80%
+  ) ;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  background-size: 500% auto;
+  animation: textShine 5s ease-in-out infinite alternate;
+}
+
+@keyframes textShine {
+  0%{
+    background-position: 0% 50%;
   }
-  to {
-    transform: rotate(360deg);
+  100% {
+    background-position: 100% 50%;
   }
+  
+}
+
+#rolltext{
+  height: 4.125rem;
+  line-height: 4rem;
+  Position: absolute;
+  top: 0;
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #1D3557;
+  animation: slide 5s infinite;
+}
+
+@keyframes slide {
+  0% {
+    top: 0;
+  }
+  25%{
+    top: -4rem;
+  }
+  50%{
+    top: -8rem;
+  }
+  72.5%{
+    top: -12.25rem;
+  }
+}
+
+@media screen and (max-width:600px){
+  h1{
+    text-align: center;
+    text-transform: uppercase;
+    color: #F1FAEE;
+    font-size: 2.125rem;
+  }
+  .roller{
+    height: 2.6rem;
+    line-height: 2.125rem;
+  }
+  .roller #rolltext {
+    animation: slide-mob 5s infinite;
+  }
+
+  @keyframes slide-mob{
+    0%{
+      top: 0;
+    }
+    25%{
+      top: -2.125rem;
+    }
+    50%{
+      top: -4.25rem;
+    }
+    72.5%{
+      top: -6.375rem;
+    }
+  }
+}
+
+.container{
+  height: auto;
+  width: 900px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.currency-icon{
+  width: 20px; /* Adjust the width as needed*/
+  height: 20px; /* Adjust the height as needed*/
+  margin-right: 5px; /* Adjust the margin as needed*/
+  fill: currentColor; /* Use the current text color for SVG fill*/
+}
+
+.group{
+  background: #fff;
+  width: 180px;
+  margin: 0 auto 20px;
+  display: grid;
+  grid-template-columns: 100px 80px;
+  border-radius: 25px;
+}
+
+input,.select{
+  background: none;
+  color: #000000;
+  border: 0;
+  font-size: 20px;
+  font-weight: bold;
+  height: 100%;
+}
+
+input{
+  padding-left: 10px;
+} 
+
+.select{
+  padding: 8px;
+}
+
+
+
+
+.middle,.right{
+  width: 120px;
+}
+
+.switch{
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 3em;
+}
+
+
+.switch:active{
+  transform:translateY(1px);
+}
+
+.result{
+  box-sizing: border-box;
+  width: 800px;
+  padding-left: 30px;
+}
+
+button{
+  width: 100px;
+  height: 100%;
+  font-weight: bold;
+  font-size: 20px;
+  background-color: rgb(255, 255, 255);
+  cursor: pointer;
+  border-radius: 50px;
+  padding: 5px;
+}
+
+select{
+  width:100%;
+  height: 40px;
+  font-weight: bold;
+  background-color: #fff;
+  font-size: 20px;
+  border-radius: 50px;
+  line-height: 30px;
+  padding: 5px;
+}
+
+h1{
+  font-weight: bold;
+  font-size: 80px;
+}
+
+p,h3,button,.switch{
+  color: rgb(0, 0, 0);
+}
+
+p{
+  font-size: 25px;
 }
