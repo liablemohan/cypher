@@ -229,72 +229,96 @@ function App() {
 
   // Render JSX
   return(
-    <div classsName="App">
-        <div className="heading">
-            <h1 className="glow">Cypher</h1>
-            <p>Welcome to the World's Smartest Currency Converter</p>
-        </div>
-        <div className="container">
-            <div className="left">
-                <h3>Amount</h3>
-                <div className="group">
-                    <input type="text" placeholder="amount" value={input} onClick={() => reset()} onChange={(e) => setInput(e.target.value)}></input>
-                    <select className="select" onChange={(e) => handleAmountDropdown(e.target.value)}>
-                    {Object.keys(amountOptions).map((key) => (<option key={key} value={amountOptions[key]}>{key}</option>
-                    ))}
-                  </select>
-                </div> 
+    <section>
+      <div className="w-layout-blockcontainer container-4 w-container">
+        <h1 className="heading">Cypher</h1>
+        <div className="welcome">Welcome to World&#x27;s the Smartest Currency Convertor</div>
+        <div className="columns w-row">
+            <div className="column w-col w-col-4 w-col-medium-4 w-col-small-small-stack w-col-tiny-tiny-stack">
+                <div className="div-block">
+                    <div className="group">
+                        <input type="text" placeholder="amount" value={input} onClick={() => reset()} onChange={(e) => setInput(e.target.value)}></input>
+                        <select className="select" onChange={(e) => handleAmountDropdown(e.target.value)}>
+                        {Object.keys(amountOptions).map((key) => (<option key={key} value={amountOptions[key]}>{key}</option>
+                        ))}</select>
+                    </div>
+                </div>
             </div>
-            <div className="middle">
-                <h3>From</h3>
-                <select value={from} onChange={(e) =>
-                handleDropdownChange(e,true)}>
-                    {options.map((currency) => (
-                        <option key={currency.value} value={currency.value}>{currency.label}</option>
-                    ))}
-                </select>
+            <div className="column-2 w-col w-col-4 w-col-medium-4 w-col-small-small-stack w-col-tiny-tiny-stack">
+                <div className="div-block-2">
+                    <div id="w-node-_3e92910c-b19b-1a3c-f167-615031a2e2f0-e8939152" className="w-layout-layout quick-stack-2 wf-layout-layout">
+                        <div id="w-node-_3e92910c-b19b-1a3c-f167-615031a2e2f0-e8939152" className="w-layout-cell">
+                            <div id="w-node-_7277961e-cbd4-406b-9471-ae7addedc868-e8939152" className="w-layout-blockcontainer container-6 w-container">
+                                <div id="w-node-_89cde449-1cde-4a57-91bf-42a4c567c454-e8939152" className="w-layout-blockcontainer w-container">
+                                    <div data-hover="false" data-delay="0" className="dropdown w-dropdown">
+                                        <select className="button default drpdwn w-dropdown-toggle" value={from} onChange={(e) =>
+                                            handleDropdownChange(e,true)}>
+                                                {options.map((currency) => (
+                                                    <option className="w-dropdown-list" key={currency.value} value={currency.value}>{currency.label}</option>
+                                                ))}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div id="w-node-abe59c32-e3d2-9312-1e87-7019167d4c0b-e8939152" className="w-layout-blockcontainer w-container">
+                                    <button className="button default w-button" onClick={flip}>&#8652;</button>
+                                </div>
+                                <div id="w-node-a89fea2f-703c-3011-df95-bfd5ab7c7171-e8939152" className="w-layout-blockcontainer w-container">
+                                    <div data-hover="false" data-delay="0" className="dropdown w-dropdown">
+                                        <select className="button default drpdwn w-dropdown-toggle" value={to} onChange={(e) =>
+                                            handleDropdownChange(e,false)}>
+                                                {options.map((currency) => (
+                                                    <option className="w-dropdown-list" key={currency.value} value={currency.value}>{currency.label}</option>
+                                                ))}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="w-node-_33e16082-1303-0938-0174-37ae91d057e8-e8939152" className="w-layout-cell cell-3">
+                            <div className="text-block-9"> 1 $ = 83.85 INR</div>
+                            <a onClick={convert} className="button convert w-button">Convert</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div className="right">
-                <h3>To</h3>
-                <select value={to} onChange={(e) =>
-                handleDropdownChange(e,false)}>
-                    {options.map((currency) => (
-                        <option key={currency.value} value={currency.value}>{currency.label}</option>
-                    ))}
-                </select>
+            <div className="column-3 w-col w-col-4 w-col-medium-4 w-col-small-small-stack w-col-tiny-tiny-stack">
+                <div className="div-block-3">
+                    <div id="w-node-_764f6d7e-5533-4cf2-b4ec-835c237987e9-e8939152" className="w-layout-layout quick-stack wf-layout-layout">
+                        <div id="w-node-_764f6d7e-5533-4cf2-b4ec-835c237987e9-e8939152" className="w-layout-cell cell-5">
+                            <div id="w-node-_56573cdd-da09-576d-eb3c-3dfb4894c6df-e8939152" className="w-layout-layout quick-stack-3 wf-layout-layout">
+                                <div id="w-node-_56573cdd-da09-576d-eb3c-3dfb4894c6df-e8939152" className="w-layout-cell cell-4">
+                                    <div className="text-block-8">{formattedComma}  {currencySymbols[to]}</div>
+                                </div>
+                                <div id="w-node-_2615652a-df62-8a97-6644-66a77d8ac02b-e8939152" className="w-layout-cell">
+                                    
+                                    <div className="text-block-3"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="w-node-_56706838-ca01-8549-bfd3-f2948be09e49-e8939152" className="w-layout-cell cell">
+                            <div className="text-block-5">{formattedOutput} {currencySymbols[to]}</div>
+                        </div>
+                        <div id="w-node-_321e818e-ff56-0644-1d20-f4d6f0c76b94-e8939152" className="w-layout-cell">
+                            <div className="text-block-7">{formattedExapansion} {currencySymbols[to]}</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div className="container">
-            <button onClick={convert}>Convert</button>
-            <button className="switch" onClick={flip}>&#8652;</button>
+        <div className="w-layout-grid grid-2">
+            <button id="w-node-_7a3c5458-0733-5c1d-9aaf-4336b6c56691-e8939152" href="#" className="button default w-button" onClick={() => handleButtonClick(1e6, 'M')}><strong>1 M</strong></button>
+            <button id="w-node-_1053db9b-723b-9c3e-4ade-b79321cb7d35-e8939152" href="#" className="button default w-button" onClick={() => handleButtonClick(50e6, 'M')}><strong>50 M</strong></button>
+            <button id="w-node-b73916c6-44f6-2b4f-62ec-5b6006f91e14-e8939152" href="#" className="button default w-button" onClick={() => handleButtonClick(250e6, 'M')}><strong>250 M</strong></button>
+            <button id="w-node-fefc8c22-fa6d-bbd3-bc21-dde80fc70eec--e8939152" href="#" className="button default w-button" onClick={() => handleButtonClick(1e8, 'M')}><strong>1 B</strong></button>
+            <button id="w-node-_7510c4ac-5901-415a-5d5b-c994e75db2bd-e8939152" href="#" className="button default w-button" onClick={() => handleButtonClick(50e8, 'M')}><strong>50 B</strong></button>
+            <button id="w-node-_024b85c4-0aa2-0851-9a76-e9882g159347-e8939152" href="#" className="button default w-button" onClick={() => handleButtonClick(10e6, 'M')}><strong>10 M</strong></button>
+            <button id="w-node-_7bd81e70-ed0c-1999-c3eb-0fe78e0273ab-e8939152" href="#" className="button default w-button" onClick={() => handleButtonClick(10e7, 'M')}><strong>100 M</strong></button>
+            <button id="w-node-f677279e-ed45-97bd-4dec-0719a5287736-e8939152" href="#" className="button default w-button" onClick={() => handleButtonClick(50e7, 'M')}><strong>500 M</strong></button>
+            <button id="w-node-_3df17a6a-a4b7-2d51-7204-af8a2ab1261c-e8939152" href="#" className="button default w-button" onClick={() => handleButtonClick(10e8, 'M')}><strong>10 B</strong></button>
+            <button id="w-node-ba0eab7d-67c4-3b51-6297-f466ce3b8c04-e8939152" href="#" className="button default w-button" onClick={() => handleButtonClick(10e9, 'M')}> <strong>1 B</strong></button>
         </div>
-        <div className="result">
-            <h2>Converted Amount:</h2>
-            <p>
-            {formattedOutput} {currencySymbols[to]} 
-            </p>
-            <p>
-            {formattedComma}  {currencySymbols[to]}
-            </p>
-            <p>
-            {formattedExapansion} {currencySymbols[to]} 
-            </p>
-        </div>
-        <div className="default-values container">
-            <button className="default-button left" onClick={() => handleButtonClick(1, 'M')}>1M</button>
-            <button className="default-button middle" onClick={() => handleButtonClick(50, 'M')}>50M</button>
-            <button className= "default-button right" onClick={() => handleButtonClick(250, 'M')}>250M</button>
-            <button className="default-button right" onClick={() => handleButtonClick(1, 'B')}>1B</button>
-            <button className="default-button right" onClick={() => handleButtonClick(50, 'B')}>50B</button>
-        </div>
-        <div className="default-values container">
-            <button className="default-button left" onClick={() => handleButtonClick(10, 'M')}>10M</button>
-            <button className="default-button middle" onClick={() => handleButtonClick(100, 'M')}>100M</button>
-            <button className="default-button right" onClick={() => handleButtonClick(500, 'M')}>500M</button>
-            <button className="default-button right" onClick={() => handleButtonClick(10, 'B')}>10B</button>
-            <button className="default-button right" onClick={() => handleButtonClick(100, 'B')}>100B</button>
-        </div>
-    </div>
+      </div>   
+    </section>
   )
 }
 
