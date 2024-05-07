@@ -260,7 +260,7 @@ function App() {
                                     </div>
                                 </div>
                                 <div id="w-node-abe59c32-e3d2-9312-1e87-7019167d4c0b-e8939152" className="w-layout-blockcontainer w-container">
-                                    <button className="button default w-button" onClick={flip}>&#8652;</button>
+                                    <button className="button default swap w-button" onClick={flip}>&#8652;</button>
                                 </div>
                                 <div id="w-node-a89fea2f-703c-3011-df95-bfd5ab7c7171-e8939152" className="w-layout-blockcontainer w-container">
                                     <div data-hover="false" data-delay="0" className="dropdown w-dropdown">
