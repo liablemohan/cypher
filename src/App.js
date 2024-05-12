@@ -104,6 +104,7 @@ function App() {
   //This resets input each time a user click on input
   function reset(){
     setOutput(0);
+    setInput('');
   }
 
   //// Output for USD: "123 Million" Output for INR: "12 Crore"
@@ -139,36 +140,21 @@ function App() {
     return `${roundedValue} ${denomArray[largestIndex]}`;
   }
 
-  function formatComma(number, to) {
-    // Convert number to string
-    const numStr = number.toString();
 
-    // Separate the decimal part, if any
-    let afterPoint = '';
-    const decimalIndex = numStr.indexOf('.');
-    if (decimalIndex > 0)
-       afterPoint = numStr.substring(decimalIndex);
-
-    // Remove decimal part and convert to integer
-    const integerPart = Math.floor(number).toString();
-
-    // Format the integer part with commas for thousands separator
-    let formattedIntegerPart = '';
-    for(let i = integerPart.length -1, j = 0; i >= 0; i--, j++) {
-      if(j > 0 && j % 3 === 0) {
-        formattedIntegerPart = ',' + formattedIntegerPart;
-      }
-      formattedIntegerPart = integerPart[i] + formattedIntegerPart;
+  // Comma format
+  function formatComma(number,to) {
+    //Check if the currency is INR (Indian Rupees)
+    if(to === 'inr') {
+      //Format the number according to the Indian number system
+      //For INR, use commas as separators for thousands, lakhs, crores, etc.
+      const formattedNumber = new Intl.NumberFormat('en-IN').format(number);
+      return formattedNumber;
+    } else{
+      //For other currencies, use the standard international number format
+      //without converting the digits into words
+      const formattedNumber = new Intl.NumberFormat('en-US', {maximumFractionDigits:2}).format(number);
+      return formattedNumber;
     }
-
-    // Use currency-specific formatting for INR
-    if (to === 'inr') {
-        // Add INR symbol
-        return formattedIntegerPart + afterPoint;
-    }
-
-    // Use general formatting for other currencies
-    return formattedIntegerPart + afterPoint;
   }
 
 
@@ -191,7 +177,7 @@ function App() {
         usd: ['', 'Thousand', 'Million', 'Billion', 'Trillion'],
         gbp: ['', 'Thousand', 'Million', 'Billion', 'Trillion'],
         eur: ['', 'Thousand', 'Million', 'Billion', 'Trillion'],
-        inr: ['', 'Hundred', 'Thousand', 'Lakh', 'Crore', 'Hundred Crore', 'Thousand Crore', 'Lakh Crore', 'Crore Crore']
+        inr: ['', 'Thousand', 'Lakh', 'Crore', 'Hundred Crore', 'Thousand Crore', 'Lakh Crore', 'Crore Crore']
     };
 
     // Handle the integer part
@@ -204,21 +190,27 @@ function App() {
             }
         }
     }
-
-    // Handle the decimal part, if any
-    //if (decimalPart) {
-    //    expandedForm.push(`${decimalPart} Decimal`);
-    //}
-
-    //// Join the expanded form array with 'and' between each part
-    //const formattedOutput = expandedForm.join(' and ');
-
-    //Return the formatted interger part only if it exists
     return expandedForm.join(' ');
   }
 
-  
+  //To give the bar to denomination format
+  function extractDenominations(inputString){
+    //Split the input string by spaces
+    const parts = inputString.split(' ');
 
+    //Initialize an array to store extracted denominations
+    const extractedDenominations = [];
+
+    //Iterate through the parts to extract denominations
+    for(let i = 1; i < parts.length; i +=2) {
+      extractedDenominations.push(parts[i]);
+    }
+
+    //Return the extracted denominations array
+    return extractedDenominations;
+  }
+
+  //To display current unit rates
   function currentRates(){
     if (!info || !info[to]) {
       return 'Conversion rate not available';
@@ -231,6 +223,7 @@ function App() {
   const formattedOutput = roundToLargestDenomination(output, to);
   const formattedComma = formatComma(output, to);
   const formattedExpand = internationalSystem(output,to);
+  const commaDenominations = extractDenominations(formattedExpand);
 
   const conversionRates = currentRates();
   
@@ -298,8 +291,7 @@ function App() {
                                     <div className="text-block-8">{formattedComma}  {currencySymbols[to]}</div>
                                 </div>
                                 <div id="w-node-_2615652a-df62-8a97-6644-66a77d8ac02b-e8939152" className="w-layout-cell">
-                                    
-                                    <div className="text-block-3"></div>
+                                    <div className="text-block-3">{commaDenominations}</div>
                                 </div>
                             </div>
                         </div>
