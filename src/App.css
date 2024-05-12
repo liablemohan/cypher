@@ -220,7 +220,7 @@ p{
   width: 180px;
   margin: 0 auto 20px;
   display: grid;
-  grid-template-columns: 100px 80px;
+  grid-template-columns: 140px 40px;
   border-radius: 25px;
 }
 
@@ -234,11 +234,11 @@ input,.select{
 }
 
 input{
-  padding-left: 10px;
+  padding-left: 8px;
 } 
 
 .select{
-  padding: 8px;
+  padding: 6px;
 }
 
 :root{
@@ -518,6 +518,10 @@ section{
   margin-left: 21px;
   font-size: 14px;
 }
+.text-block-cur{
+  line-height: 20px;
+  font-size: 18px;
+}
 .quick-stack{
   width: 276px;
   margin-left: -39px;
@@ -782,6 +786,7 @@ section{
   }
   .container-4{
       max-width: 568px;
+      height: 800px;
   }
   .button.default{
       width: 75px;
@@ -889,6 +894,7 @@ section{
   }
   .container-4{
       max-width: 320px;
+      height: 800px;
   }
   .button.default{
       width: 55px;

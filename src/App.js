@@ -139,8 +139,6 @@ function App() {
     return `${roundedValue} ${denomArray[largestIndex]}`;
   }
 
-
-  // Comma format
   function formatComma(number, to) {
     // Convert number to string
     const numStr = number.toString();
@@ -176,7 +174,7 @@ function App() {
 
   // Output for INR: "12 Lakh 34 Thousand 567 and 89 Decimal" 
   // Output for USD: "1 Million 234 Thousand 567 and 89 Decimal"
-  function formatNumberExpanded(number, to) {
+  function internationalSystem(number, to) {
     const numStr = number.toString();
 
     // Split the number into integer and decimal parts
@@ -193,7 +191,7 @@ function App() {
         usd: ['', 'Thousand', 'Million', 'Billion', 'Trillion'],
         gbp: ['', 'Thousand', 'Million', 'Billion', 'Trillion'],
         eur: ['', 'Thousand', 'Million', 'Billion', 'Trillion'],
-        inr: ['', 'Lakh', 'Crore', 'Arab', 'Kharab', 'Neel', 'Padma', 'Shankh', 'Maha-Shankh']
+        inr: ['', 'Hundred', 'Thousand', 'Lakh', 'Crore', 'Hundred Crore', 'Thousand Crore', 'Lakh Crore', 'Crore Crore']
     };
 
     // Handle the integer part
@@ -219,12 +217,22 @@ function App() {
     return expandedForm.join(' ');
   }
 
+  
+
+  function currentRates(){
+    if (!info || !info[to]) {
+      return 'Conversion rate not available';
+    }
+    const conversionRates = info[to].toFixed(2);
+    return conversionRates;
+  }
 
   //Calling Result format function
   const formattedOutput = roundToLargestDenomination(output, to);
   const formattedComma = formatComma(output, to);
-  const formattedExapansion = formatNumberExpanded(output, to);
+  const formattedExpand = internationalSystem(output,to);
 
+  const conversionRates = currentRates();
   
 
   // Render JSX
@@ -254,7 +262,7 @@ function App() {
                                         <select className="button default drpdwn w-dropdown-toggle" value={from} onChange={(e) =>
                                             handleDropdownChange(e,true)}>
                                                 {options.map((currency) => (
-                                                    <option className="w-dropdown-list" key={currency.value} value={currency.value}>{currency.label}</option>
+                                                    <option className="w-dropdown-list text-block-cur" key={currency.value} value={currency.value}>{currency.label}</option>
                                                 ))}
                                         </select>
                                     </div>
@@ -267,7 +275,7 @@ function App() {
                                         <select className="button default drpdwn w-dropdown-toggle" value={to} onChange={(e) =>
                                             handleDropdownChange(e,false)}>
                                                 {options.map((currency) => (
-                                                    <option className="w-dropdown-list" key={currency.value} value={currency.value}>{currency.label}</option>
+                                                    <option className="w-dropdown-list text-block-cur" key={currency.value} value={currency.value}>{currency.label}</option>
                                                 ))}
                                         </select>
                                     </div>
@@ -275,8 +283,8 @@ function App() {
                             </div>
                         </div>
                         <div id="w-node-_33e16082-1303-0938-0174-37ae91d057e8-e8939152" className="w-layout-cell cell-3">
-                            <div className="text-block-9"> 1 $ = 83.85 INR</div>
-                            <a onClick={convert} className="button convert w-button">Convert</a>
+                            <div className="text-block-9">1 {currencySymbols[from]} = {conversionRates} {currencySymbols[to]}</div>
+                            <button onClick={convert} className="button convert w-button">Convert</button>
                         </div>
                     </div>
                 </div>
@@ -299,7 +307,7 @@ function App() {
                             <div className="text-block-5">{formattedOutput} {currencySymbols[to]}</div>
                         </div>
                         <div id="w-node-_321e818e-ff56-0644-1d20-f4d6f0c76b94-e8939152" className="w-layout-cell">
-                            <div className="text-block-7">{formattedExapansion} {currencySymbols[to]}</div>
+                            <div className="text-block-7">{formattedExpand} {currencySymbols[to]}</div>
                         </div>
                     </div>
                 </div>
@@ -307,15 +315,15 @@ function App() {
         </div>
         <div className="w-layout-grid grid-2">
             <button id="w-node-_7a3c5458-0733-5c1d-9aaf-4336b6c56691-e8939152" href="#" className="button default w-button" onClick={() => handleButtonClick(1e6, 'M')}><strong>1 M</strong></button>
-            <button id="w-node-_1053db9b-723b-9c3e-4ade-b79321cb7d35-e8939152" href="#" className="button default w-button" onClick={() => handleButtonClick(50e6, 'M')}><strong>50 M</strong></button>
-            <button id="w-node-b73916c6-44f6-2b4f-62ec-5b6006f91e14-e8939152" href="#" className="button default w-button" onClick={() => handleButtonClick(250e6, 'M')}><strong>250 M</strong></button>
-            <button id="w-node-fefc8c22-fa6d-bbd3-bc21-dde80fc70eec--e8939152" href="#" className="button default w-button" onClick={() => handleButtonClick(1e8, 'M')}><strong>1 B</strong></button>
-            <button id="w-node-_7510c4ac-5901-415a-5d5b-c994e75db2bd-e8939152" href="#" className="button default w-button" onClick={() => handleButtonClick(50e8, 'M')}><strong>50 B</strong></button>
-            <button id="w-node-_024b85c4-0aa2-0851-9a76-e9882g159347-e8939152" href="#" className="button default w-button" onClick={() => handleButtonClick(10e6, 'M')}><strong>10 M</strong></button>
-            <button id="w-node-_7bd81e70-ed0c-1999-c3eb-0fe78e0273ab-e8939152" href="#" className="button default w-button" onClick={() => handleButtonClick(10e7, 'M')}><strong>100 M</strong></button>
-            <button id="w-node-f677279e-ed45-97bd-4dec-0719a5287736-e8939152" href="#" className="button default w-button" onClick={() => handleButtonClick(50e7, 'M')}><strong>500 M</strong></button>
-            <button id="w-node-_3df17a6a-a4b7-2d51-7204-af8a2ab1261c-e8939152" href="#" className="button default w-button" onClick={() => handleButtonClick(10e8, 'M')}><strong>10 B</strong></button>
-            <button id="w-node-ba0eab7d-67c4-3b51-6297-f466ce3b8c04-e8939152" href="#" className="button default w-button" onClick={() => handleButtonClick(10e9, 'M')}> <strong>1 B</strong></button>
+            <button id="w-node-_1053db9b-723b-9c3e-4ade-b79321cb7d35-e8939152" href="#" className="button default w-button" onClick={() => handleButtonClick(5e7, 'M')}><strong>50 M</strong></button>
+            <button id="w-node-b73916c6-44f6-2b4f-62ec-5b6006f91e14-e8939152" href="#" className="button default w-button" onClick={() => handleButtonClick(25e7, 'M')}><strong>250 M</strong></button>
+            <button id="w-node-fefc8c22-fa6d-bbd3-bc21-dde80fc70eec--e8939152" href="#" className="button default w-button" onClick={() => handleButtonClick(1e9, 'B')}><strong>1 B</strong></button>
+            <button id="w-node-_7510c4ac-5901-415a-5d5b-c994e75db2bd-e8939152" href="#" className="button default w-button" onClick={() => handleButtonClick(5e10, 'B')}><strong>50 B</strong></button>
+            <button id="w-node-_024b85c4-0aa2-0851-9a76-e9882g159347-e8939152" href="#" className="button default w-button" onClick={() => handleButtonClick(1e7, 'M')}><strong>10 M</strong></button>
+            <button id="w-node-_7bd81e70-ed0c-1999-c3eb-0fe78e0273ab-e8939152" href="#" className="button default w-button" onClick={() => handleButtonClick(1e8, 'M')}><strong>100 M</strong></button>
+            <button id="w-node-f677279e-ed45-97bd-4dec-0719a5287736-e8939152" href="#" className="button default w-button" onClick={() => handleButtonClick(5e8, 'M')}><strong>500 M</strong></button>
+            <button id="w-node-_3df17a6a-a4b7-2d51-7204-af8a2ab1261c-e8939152" href="#" className="button default w-button" onClick={() => handleButtonClick(1e10, 'B')}><strong>10 B</strong></button>
+            <button id="w-node-ba0eab7d-67c4-3b51-6297-f466ce3b8c04-e8939152" href="#" className="button default w-button" onClick={() => handleButtonClick(1e11, 'B')}> <strong>100 B</strong></button>
         </div>
       </div>   
     </section>
