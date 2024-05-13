@@ -491,8 +491,8 @@ section{
   display: flex;
 }
 .text-block-3{
-  font-weight: 800;
-  margin-top: 0px;
+  font-weight: 600;
+  margin-top: -6px;
   font-size: 10px;
   line-height: 20px;
   display: flex;

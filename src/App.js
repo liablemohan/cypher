@@ -115,10 +115,10 @@ function App() {
 
     // Denominations based on currency
     const denominations = {
-        usd: ['Thousand', 'Million', 'Billion', 'Trillion'],
-        gbp: ['Thousand', 'Million', 'Billion', 'Trillion'],
-        eur: ['Thousand', 'Million', 'Billion', 'Trillion'],
-        inr: ['Lakh', 'Crore', 'Arab', 'Kharab', 'Neel', 'Padma', 'Shankh', 'Maha-Shankh']
+        usd: ['', ' Thousand', ' Million', ' Billion', ' Trillion', ' Quadrillion', ' Quintillion', ' Sextillion', ' Septillion', ' Octillion', ' Nonillion', ' Decillion', ' Undecillion', ' Duodecillion', ' Tredecillion', ' Quattuordecillion', ' Quindecillion', ' Sexdecillion', ' Septendecillion', ' Octodecillion', ' Novemdecillion', ' Vigintillion'],
+        gbp: ['', ' Thousand', ' Million', ' Billion', ' Trillion', ' Quadrillion', ' Quintillion', ' Sextillion', ' Septillion', ' Octillion', ' Nonillion', ' Decillion', ' Undecillion', ' Duodecillion', ' Tredecillion', ' Quattuordecillion', ' Quindecillion', ' Sexdecillion', ' Septendecillion', ' Octodecillion', ' Novemdecillion', ' Vigintillion'],
+        eur: ['', ' Thousand', ' Million', ' Billion', ' Trillion', ' Quadrillion', ' Quintillion', ' Sextillion', ' Septillion', ' Octillion', ' Nonillion', ' Decillion', ' Undecillion', ' Duodecillion', ' Tredecillion', ' Quattuordecillion', ' Quindecillion', ' Sexdecillion', ' Septendecillion', ' Octodecillion', ' Novemdecillion', ' Vigintillion'],
+        inr: ['','Thousand','Lakh', 'Crore', 'Hundred Crore', 'Ten Thousand Crore', 'Ten Lakh Crore', 'Padma', 'Shankh', 'Maha-Shankh']
     };
 
     // Determine the denominations array based on the currency
@@ -139,6 +139,7 @@ function App() {
     // Otherwise, return the rounded value with the largest denomination
     return `${roundedValue} ${denomArray[largestIndex]}`;
   }
+  
 
 
   // Comma format
@@ -174,9 +175,9 @@ function App() {
 
     // Denominations based on currency
     const denominations = {
-        usd: ['', 'Thousand', 'Million', 'Billion', 'Trillion'],
-        gbp: ['', 'Thousand', 'Million', 'Billion', 'Trillion'],
-        eur: ['', 'Thousand', 'Million', 'Billion', 'Trillion'],
+        usd: ['', ' Thousand', ' Million', ' Billion', ' Trillion', ' Quadrillion', ' Quintillion', ' Sextillion', ' Septillion', ' Octillion', ' Nonillion', ' Decillion', ' Undecillion', ' Duodecillion', ' Tredecillion', ' Quattuordecillion', ' Quindecillion', ' Sexdecillion', ' Septendecillion', ' Octodecillion', ' Novemdecillion', ' Vigintillion'],
+        gbp: ['', ' Thousand', ' Million', ' Billion', ' Trillion', ' Quadrillion', ' Quintillion', ' Sextillion', ' Septillion', ' Octillion', ' Nonillion', ' Decillion', ' Undecillion', ' Duodecillion', ' Tredecillion', ' Quattuordecillion', ' Quindecillion', ' Sexdecillion', ' Septendecillion', ' Octodecillion', ' Novemdecillion', ' Vigintillion'],
+        eur: ['', ' Thousand', ' Million', ' Billion', ' Trillion', ' Quadrillion', ' Quintillion', ' Sextillion', ' Septillion', ' Octillion', ' Nonillion', ' Decillion', ' Undecillion', ' Duodecillion', ' Tredecillion', ' Quattuordecillion', ' Quindecillion', ' Sexdecillion', ' Septendecillion', ' Octodecillion', ' Novemdecillion', ' Vigintillion'],
         inr: ['', 'Thousand', 'Lakh', 'Crore', 'Hundred Crore', 'Thousand Crore', 'Lakh Crore', 'Crore Crore']
     };
 
@@ -207,7 +208,7 @@ function App() {
     }
 
     //Return the extracted denominations array
-    return extractedDenominations;
+    return extractedDenominations.join(' ');
   }
 
   //To display current unit rates
