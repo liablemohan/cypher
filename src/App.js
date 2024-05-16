@@ -14,7 +14,7 @@ function App() {
 
   //M,B,K value object
   const amountOptions = {
-    '':'',
+    '▷':'',
     K: 1e3,
     M: 1e6,
     B: 1e9,
