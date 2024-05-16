@@ -245,6 +245,13 @@ input{
   --black: black;
 }
 
+select{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: '';
+}
+
 .w-layout-blockcontainer{
   max-width: 940px;
   margin-left: auto;
@@ -288,75 +295,11 @@ input{
   }
 }
 
-.navbar-logo-center{
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-right: 0;
-}
-
-.navbar-logo-center-container{
-  z-index: 5;
-  background-color: rgba(0,0,0,0);
-  width: 1030px;
-  max-width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 20px;
-}
-.navbar-logo-center-container.shadow-three{
-  width: 100%;
-  max-width: 1140px;
-}
-.container-2{
-  width: 100%;
-  max-width: 940px;
-  margin-left: auto;
-  margin-right: auto;
-}
-.navbar-wrapper-three{
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  position: relative;
-}
-.navbar-brand-three{
-  z-index: 5;
-  position: absolute;
-}
-.nav-menu-wrapper-three{
-  width: 100%;
-}
-.navbar-menu-three{
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0;
-  display: flex;
-}
-.nav-menu-block{
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 0;
-  display: flex;
-}
 section{
 
   background-image: linear-gradient(35deg, #6BEBE4 35%, #C4E6E7 45%, #90CAEB 55%, #FFEFE5 100% );
 }
-.button-primary{
-  color: #fff;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  background-color: #1a1b1f;
-  padding: 12px 25px;
-  font-size: 18px;
-  line-height: 20px;
-  transition: all.2s;
-  cursor: pointer;
-}
-.button-primary:hover{
-  color: #fff;
-  background-color: #32343a;
-}
+
 .button-primary:active{
   background-color: #43464d;
 }
@@ -378,6 +321,7 @@ section{
   border: 1px solid #0f007e;
   border-radius: 20px;
   justify-content: center;
+  font-weight: 500;
   align-items: center;
   margin-top: 9px;
   display: flex;
@@ -386,12 +330,14 @@ section{
 .button.default{
   width: 106px;
   height: 36px;
+  font-size:18px;
   margin-top: 12px;
   padding-left: 12px;
   padding-right: 12px;
 }
 .button.default.drpdwn{
   width: 41px;
+  padding-left: 12px;
 }
 .button.swap{
   width: 50px;
@@ -520,7 +466,7 @@ section{
 }
 .text-block-cur{
   line-height: 20px;
-  font-size: 18px;
+  font-size: 20px;
 }
 .quick-stack{
   width: 276px;
@@ -772,20 +718,6 @@ section{
 }
 
 @media screen and (max-width: 767px){
-  .navbar-brand-three{
-      padding-left: 0;
-  }
-  .nav-menu-three{
-      border-radius: 20px;
-      flex-direction: column;
-      padding-bottom: 30px;
-  }
-  .nav-menu-block{
-      flex-direction: column;
-  }
-  .mobile-margin-top-10{
-      margin-top: 10px;
-  }
   .container-4{
       max-width: 568px;
       height: 800px;
@@ -793,8 +725,12 @@ section{
   .button.default{
       width: 75px;
       height: 30px;
+      font-size:16px;
       padding-left: 5px;
       padding-right: 5px;
+  }
+  .button.drpdwn{
+    font-size:20px;
   }
   .button.convert{
       margin-top: 32px;
@@ -901,11 +837,16 @@ section{
   .button.default{
       width: 55px;
       height: 30px;
+      font-size: 12px;
+  }
+  .button.drpdwn{
+    font-size:20px;
   }
   .button.convert{
       width: 100px;
       height: 25px;
   }
+  
   .dropdown{
     width: 60px;
   }

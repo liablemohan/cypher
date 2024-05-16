@@ -256,7 +256,7 @@ function App() {
                                         <select className="button default drpdwn w-dropdown-toggle" value={from} onChange={(e) =>
                                             handleDropdownChange(e,true)}>
                                                 {options.map((currency) => (
-                                                    <option className="w-dropdown-list text-block-cur" key={currency.value} value={currency.value}>{currency.label}</option>
+                                                    <option className="w-dropdown-list" key={currency.value} value={currency.value}>{currency.label}</option>
                                                 ))}
                                         </select>
                                     </div>
@@ -269,7 +269,7 @@ function App() {
                                         <select className="button default drpdwn w-dropdown-toggle" value={to} onChange={(e) =>
                                             handleDropdownChange(e,false)}>
                                                 {options.map((currency) => (
-                                                    <option className="w-dropdown-list text-block-cur" key={currency.value} value={currency.value}>{currency.label}</option>
+                                                    <option className="w-dropdown-list " key={currency.value} value={currency.value}>{currency.label}</option>
                                                 ))}
                                         </select>
                                     </div>
