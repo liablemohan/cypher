@@ -192,120 +192,106 @@ function App() {
   // "twelve lakh crore thirty-four thousand crore five hundred and sixty-seven crore eighty-nine lakh twelve thousand three hundred and twenty-three point five six"
   // Arrays to store number words
   const one = [
-    "", "one", "two", "three", "four",
-    "five", "six", "seven", "eight",
-    "nine", "ten", "eleven", "twelve",
-    "thirteen", "fourteen", "fifteen",
-    "sixteen", "seventeen", "eighteen",
-    "nineteen"
+      "", "one", "two", "three", "four",
+      "five", "six", "seven", "eight",
+      "nine", "ten", "eleven", "twelve",
+      "thirteen", "fourteen", "fifteen",
+      "sixteen", "seventeen", "eighteen",
+      "nineteen"
   ];
-
+  
   const ten = [
-    "", "", "twenty", "thirty", "forty",
-    "fifty", "sixty", "seventy", "eighty",
-    "ninety"
+      "", "", "twenty", "thirty", "forty",
+      "fifty", "sixty", "seventy", "eighty",
+      "ninety"
   ];
-
+  
   /**
-  * Convert a 1- or 2-digit number into words
-  * @param {number} n - The number to convert
-  * @param {string} s - The suffix to append
-  * @return {string} The word representation of the number
-  */
+   * Convert a 1- or 2-digit number into words
+   * @param {number} n - The number to convert
+   * @param {string} s - The suffix to append
+   * @return {string} The word representation of the number
+   */
   function numToWords(n, s) {
-    let str = "";
-    if (n > 19) {
-        str += ten[Math.floor(n / 10)] + " " + one[n % 10];
-    } else {
-        str += one[n];
-    }
-
-    if (n !== 0) {
-        str += " " + s;
-    }
-
-    return str.trim();
+      let str = "";
+      if (n > 19) {
+          str += ten[Math.floor(n / 10)] + " " + one[n % 10];
+      } else {
+          str += one[n];
+      }
+    
+      if (n !== 0) {
+          str += " " + s;
+      }
+    
+      return str.trim();
   }
-
+  
   /**
-  * Convert a given integer number into words
-  * @param {number} n - The number to convert
-  * @return {string} The word representation of the number
-  */
+   * Convert a given integer number into words
+   * @param {number} n - The number to convert
+   * @return {string} The word representation of the number
+   */
   function convertIntegerToWords(n) {
-    let out = "";
-
-    const lakhCrore = Math.floor(n / 100000000000);
-    const thousandCrore = Math.floor(n / 10000000000);
-    const hundredCrore = Math.floor(n / 1000000000);
-    const crore = Math.floor(n / 10000000);
-    if (lakhCrore > 0) {
-        out += lakhCrore + " Lakh Crore ";
-        n %= 10000000;
-    }
+      let out = "";
+  
+      const lakhCrore = Math.floor(n / 100000000000);
+      if (lakhCrore > 0) {
+          out += lakhCrore + " lakh crore ";
+          n %= 100000000000;
+      }
     
-    if (thousandCrore > 0) {
-        out += thousandCrore + " Thousand Crore ";
-        n %= 10000000;
-    }
+      const thousandCrore = Math.floor(n / 10000000000);
+      if (thousandCrore > 0) {
+          out += thousandCrore + " thousand crore ";
+          n %= 10000000000;
+      }
     
-    if (hundredCrore > 0) {
-        out += hundredCrore + " Hundred Crore ";
-        n %= 10000000;
-    }
+      const hundredCrore = Math.floor(n / 1000000000);
+      if (hundredCrore > 0) {
+          out += hundredCrore + " hundred crore ";
+          n %= 1000000000;
+      }
     
-    if (crore > 0) {
-        out += crore + " Crore ";
-        n %= 10000000;
-    }
-
-    const lakh = Math.floor(n / 100000);
-    if (lakh > 0) {
-        out += lakh + " Lakh ";
-        n %= 100000;
-    }
-
-    const thousand = Math.floor(n / 1000);
-    if (thousand > 0) {
-        out += thousand + " Thousand ";
-        n %= 1000;
-    }
-
-    const hundred = Math.floor(n / 100);
-    if (hundred > 0) {
-        out += hundred + "";
-        n %= 100;
-    }
-
-    if (n > 0) {
-        if (out !== "") {
-            out += n %100;
-        }
-    }
-
-    return out.trim();
+      const crore = Math.floor(n / 10000000);
+      if (crore > 0) {
+          out += crore + " crore ";
+          n %= 10000000;
+      }
+    
+      const lakh = Math.floor(n / 100000);
+      if (lakh > 0) {
+          out += lakh + " lakh ";
+          n %= 100000;
+      }
+    
+      const thousand = Math.floor(n / 1000);
+      if (thousand > 0) {
+          out += thousand + " thousand ";
+          n %= 1000;
+      }
+    
+      const hundred = Math.floor(n / 100);
+      if (hundred > 0) {
+          out += n% 1000;
+      }
+    
+      return out.trim();
   }
-
+  
   /**
-  * Convert a given number with decimals into words
-  * @param {number} num - The number to convert
-  * @return {string} The word representation of the number
-  */
+   * Convert a given number with decimals into words
+   * @param {number} num - The number to convert
+   * @return {string} The word representation of the number
+   */
   function convertToWords(num) {
-    const integerPart = Math.floor(num);
-    const fractionalPart = num % 1;
-    let result = convertIntegerToWords(integerPart);
-
-    //if (fractionalPart > 0) {
-    //    const decimalStr = fractionalPart.toFixed(2).split(".")[1];
-    //    result += " point";
-    //    for (const digit of decimalStr) {
-    //        result += " " + one[parseInt(digit)];
-    //    }
-    //}
-
-    return result.trim();
+      const integerPart = Math.floor(num);
+      const fractionalPart = num % 1;
+      let result = convertIntegerToWords(integerPart);
+      
+      return result.trim();
   }
+
 
 
   //To give the bar to denomination format
