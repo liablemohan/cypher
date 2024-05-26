@@ -139,8 +139,6 @@ function App() {
     // Otherwise, return the rounded value with the largest denomination
     return `${roundedValue} ${denomArray[largestIndex]}`;
   }
-  
-
 
   // Comma format
   function formatComma(number,to) {
@@ -158,8 +156,6 @@ function App() {
     }
   }
 
-
-  // Output for INR: "12 Lakh 34 Thousand 567 and 89 Decimal" 
   // Output for USD: "1 Million 234 Thousand 567 and 89 Decimal"
   function internationalSystem(number, to) {
     const numStr = number.toString();
@@ -178,7 +174,6 @@ function App() {
         usd: ['', ' Thousand', ' Million', ' Billion', ' Trillion', ' Quadrillion', ' Quintillion', ' Sextillion', ' Septillion', ' Octillion', ' Nonillion', ' Decillion', ' Undecillion', ' Duodecillion', ' Tredecillion', ' Quattuordecillion', ' Quindecillion', ' Sexdecillion', ' Septendecillion', ' Octodecillion', ' Novemdecillion', ' Vigintillion'],
         gbp: ['', ' Thousand', ' Million', ' Billion', ' Trillion', ' Quadrillion', ' Quintillion', ' Sextillion', ' Septillion', ' Octillion', ' Nonillion', ' Decillion', ' Undecillion', ' Duodecillion', ' Tredecillion', ' Quattuordecillion', ' Quindecillion', ' Sexdecillion', ' Septendecillion', ' Octodecillion', ' Novemdecillion', ' Vigintillion'],
         eur: ['', ' Thousand', ' Million', ' Billion', ' Trillion', ' Quadrillion', ' Quintillion', ' Sextillion', ' Septillion', ' Octillion', ' Nonillion', ' Decillion', ' Undecillion', ' Duodecillion', ' Tredecillion', ' Quattuordecillion', ' Quindecillion', ' Sexdecillion', ' Septendecillion', ' Octodecillion', ' Novemdecillion', ' Vigintillion'],
-        inr: ['', 'Thousand', 'Lakh', 'Crore', 'Hundred Crore', 'Thousand Crore', 'Lakh Crore', 'Crore Crore']
     };
 
     // Handle the integer part
@@ -193,6 +188,125 @@ function App() {
     }
     return expandedForm.join(' ');
   }
+
+  // "twelve lakh crore thirty-four thousand crore five hundred and sixty-seven crore eighty-nine lakh twelve thousand three hundred and twenty-three point five six"
+  // Arrays to store number words
+  const one = [
+    "", "one", "two", "three", "four",
+    "five", "six", "seven", "eight",
+    "nine", "ten", "eleven", "twelve",
+    "thirteen", "fourteen", "fifteen",
+    "sixteen", "seventeen", "eighteen",
+    "nineteen"
+  ];
+
+  const ten = [
+    "", "", "twenty", "thirty", "forty",
+    "fifty", "sixty", "seventy", "eighty",
+    "ninety"
+  ];
+
+  /**
+  * Convert a 1- or 2-digit number into words
+  * @param {number} n - The number to convert
+  * @param {string} s - The suffix to append
+  * @return {string} The word representation of the number
+  */
+  function numToWords(n, s) {
+    let str = "";
+    if (n > 19) {
+        str += ten[Math.floor(n / 10)] + " " + one[n % 10];
+    } else {
+        str += one[n];
+    }
+
+    if (n !== 0) {
+        str += " " + s;
+    }
+
+    return str.trim();
+  }
+
+  /**
+  * Convert a given integer number into words
+  * @param {number} n - The number to convert
+  * @return {string} The word representation of the number
+  */
+  function convertIntegerToWords(n) {
+    let out = "";
+
+    const lakhCrore = Math.floor(n / 100000000000);
+    const thousandCrore = Math.floor(n / 10000000000);
+    const hundredCrore = Math.floor(n / 1000000000);
+    const crore = Math.floor(n / 10000000);
+    if (lakhCrore > 0) {
+        out += lakhCrore + " Lakh Crore ";
+        n %= 10000000;
+    }
+    
+    if (thousandCrore > 0) {
+        out += thousandCrore + " Thousand Crore ";
+        n %= 10000000;
+    }
+    
+    if (hundredCrore > 0) {
+        out += hundredCrore + " Hundred Crore ";
+        n %= 10000000;
+    }
+    
+    if (crore > 0) {
+        out += crore + " Crore ";
+        n %= 10000000;
+    }
+
+    const lakh = Math.floor(n / 100000);
+    if (lakh > 0) {
+        out += lakh + " Lakh ";
+        n %= 100000;
+    }
+
+    const thousand = Math.floor(n / 1000);
+    if (thousand > 0) {
+        out += thousand + " Thousand ";
+        n %= 1000;
+    }
+
+    const hundred = Math.floor(n / 100);
+    if (hundred > 0) {
+        out += hundred + "";
+        n %= 100;
+    }
+
+    if (n > 0) {
+        if (out !== "") {
+            out += n %100;
+        }
+    }
+
+    return out.trim();
+  }
+
+  /**
+  * Convert a given number with decimals into words
+  * @param {number} num - The number to convert
+  * @return {string} The word representation of the number
+  */
+  function convertToWords(num) {
+    const integerPart = Math.floor(num);
+    const fractionalPart = num % 1;
+    let result = convertIntegerToWords(integerPart);
+
+    //if (fractionalPart > 0) {
+    //    const decimalStr = fractionalPart.toFixed(2).split(".")[1];
+    //    result += " point";
+    //    for (const digit of decimalStr) {
+    //        result += " " + one[parseInt(digit)];
+    //    }
+    //}
+
+    return result.trim();
+  }
+
 
   //To give the bar to denomination format
   function extractDenominations(inputString){
@@ -223,8 +337,20 @@ function App() {
   //Calling Result format function
   const formattedOutput = roundToLargestDenomination(output, to);
   const formattedComma = formatComma(output, to);
-  const formattedExpand = internationalSystem(output,to);
+  const formattedExpand = formatExpansion(output,to);
   const commaDenominations = extractDenominations(formattedExpand);
+
+  // Comma format
+  function formatExpansion(num,to) {
+    //Check if the currency is INR (Indian Rupees)
+    if(to === 'inr') {
+      const formattedNumber = convertToWords(num);
+      return formattedNumber;
+    } else{
+      const formattedNumber = internationalSystem(num);
+      return formattedNumber;
+    }
+  }
 
   const conversionRates = currentRates();
   
@@ -269,7 +395,7 @@ function App() {
                                         <select className="button default drpdwn w-dropdown-toggle" value={to} onChange={(e) =>
                                             handleDropdownChange(e,false)}>
                                                 {options.map((currency) => (
-                                                    <option className="w-dropdown-list " key={currency.value} value={currency.value}>{currency.label}</option>
+                                                    <option className="w-dropdown-list" key={currency.value} value={currency.value}>{currency.label}</option>
                                                 ))}
                                         </select>
                                     </div>
@@ -278,7 +404,7 @@ function App() {
                         </div>
                         <div id="w-node-_33e16082-1303-0938-0174-37ae91d057e8-e8939152" className="w-layout-cell cell-3">
                             <div className="text-block-9">1 {currencySymbols[from]} = {conversionRates} {currencySymbols[to]}</div>
-                            <button onClick={convert} className="button convert w-button">Convert</button>
+                            <button id="convert" onClick={convert} className="button convert w-button">Convert</button>
                         </div>
                     </div>
                 </div>
