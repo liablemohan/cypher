@@ -157,7 +157,7 @@ function App() {
   }
 
   // Output for USD: "1 Million 234 Thousand 567 and 89 Decimal"
-  function internationalSystem(number, to) {
+  function internationalSystem(number) {
     const numStr = number.toString();
 
     // Split the number into integer and decimal parts
@@ -292,7 +292,17 @@ function App() {
       return result.trim();
   }
 
-
+  // Comma format
+  function formatExpansion(number, currency) {
+    //Check if the currency is INR (Indian Rupees)
+    if(currency === 'inr') {
+      const formattedNumber = convertToWords(number);
+      return formattedNumber;
+    } else{
+      const formattedNumber = internationalSystem(number);
+      return formattedNumber;
+    }
+  }
 
   //To give the bar to denomination format
   function extractDenominations(inputString){
@@ -326,17 +336,7 @@ function App() {
   const formattedExpand = formatExpansion(output,to);
   const commaDenominations = extractDenominations(formattedExpand);
 
-  // Comma format
-  function formatExpansion(num,to) {
-    //Check if the currency is INR (Indian Rupees)
-    if(to === 'inr') {
-      const formattedNumber = convertToWords(num);
-      return formattedNumber;
-    } else{
-      const formattedNumber = internationalSystem(num);
-      return formattedNumber;
-    }
-  }
+  
 
   const conversionRates = currentRates();
   
