@@ -115,10 +115,10 @@ function App() {
 
     // Denominations based on currency
     const denominations = {
-        usd: ['', ' Thousand', ' Million', ' Billion', ' Trillion', ' Quadrillion', ' Quintillion', ' Sextillion', ' Septillion', ' Octillion', ' Nonillion', ' Decillion', ' Undecillion', ' Duodecillion', ' Tredecillion', ' Quattuordecillion', ' Quindecillion', ' Sexdecillion', ' Septendecillion', ' Octodecillion', ' Novemdecillion', ' Vigintillion'],
-        gbp: ['', ' Thousand', ' Million', ' Billion', ' Trillion', ' Quadrillion', ' Quintillion', ' Sextillion', ' Septillion', ' Octillion', ' Nonillion', ' Decillion', ' Undecillion', ' Duodecillion', ' Tredecillion', ' Quattuordecillion', ' Quindecillion', ' Sexdecillion', ' Septendecillion', ' Octodecillion', ' Novemdecillion', ' Vigintillion'],
-        eur: ['', ' Thousand', ' Million', ' Billion', ' Trillion', ' Quadrillion', ' Quintillion', ' Sextillion', ' Septillion', ' Octillion', ' Nonillion', ' Decillion', ' Undecillion', ' Duodecillion', ' Tredecillion', ' Quattuordecillion', ' Quindecillion', ' Sexdecillion', ' Septendecillion', ' Octodecillion', ' Novemdecillion', ' Vigintillion'],
-        inr: ['','Thousand','Lakh', 'Crore', 'Hundred Crore', 'Ten Thousand Crore', 'Ten Lakh Crore', 'Padma', 'Shankh', 'Maha-Shankh']
+        usd: ['', ' Thousand', ' Million', ' Billion', ' Trillion', ' Quadrillion', ' Quintillion',],
+        gbp: ['', ' Thousand', ' Million', ' Billion', ' Trillion', ' Quadrillion', ' Quintillion',],
+        eur: ['', ' Thousand', ' Million', ' Billion', ' Trillion', ' Quadrillion', ' Quintillion',],
+        inr: ['','Thousand','Lakh', 'Crore',]
     };
 
     // Determine the denominations array based on the currency
@@ -140,18 +140,95 @@ function App() {
     return `${roundedValue} ${denomArray[largestIndex]}`;
   }
 
+  function inrComma (num){
+    // Ensure the input is a number
+    num = parseFloat(num);
+
+    // Format to two decimal places
+    let formattedNumber = num.toFixed(2);
+
+    // Split the number into integer and fractional parts
+    let parts = formattedNumber.split(".");
+    let n = parts[0];
+    let deci = parts[1];
+
+    let out = "";
+  
+    const hCrore = Math.floor(n / 1000000000000000);
+    if (hCrore > 0) {
+        alert("crossed 99 Lakh Cr")
+        out += hCrore + ",";
+        n %= 1000000000000000;
+    }
+    
+    
+    const crCrore = Math.floor(n / 1000000000000);
+    if (crCrore > 0) {
+        out += crCrore + ",";
+        n %= 1000000000000;
+    }
+    
+    const lakhCrore = Math.floor(n / 100000000000);
+    if (lakhCrore > 0) {
+        out += lakhCrore + "";
+        n %= 100000000000;
+    }
+  
+    const thousandCrore = Math.floor(n / 10000000000);
+    if (thousandCrore > 0) {
+        out += thousandCrore + ",";
+        n %= 10000000000;
+    }
+  
+    const hundredCrore = Math.floor(n / 1000000000);
+    if (hundredCrore > 0) {
+        out += hundredCrore + "";
+        n %= 1000000000;
+    }
+  
+    const crore = Math.floor(n / 10000000);
+    if (crore > 0) {
+        out += crore + ",";
+        n %= 10000000;
+    }
+  
+    const lakh = Math.floor(n / 100000);
+    if (lakh > 0) {
+        out += lakh + ",";
+        n %= 100000;
+    }
+  
+    const thousand = Math.floor(n / 1000);
+    if (thousand > 0) {
+        out += thousand + ",";
+        n %= 1000;
+    }
+  
+    const hundred = Math.floor(n / 100);
+    if (hundred > 0) {
+        out += n% 1000;
+    }
+    
+    return out + "." + deci;
+
+  }
+
   // Comma format
-  function formatComma(number,to) {
+  function formatComma(n,to) {
     //Check if the currency is INR (Indian Rupees)
+    
+
     if(to === 'inr') {
       //Format the number according to the Indian number system
       //For INR, use commas as separators for thousands, lakhs, crores, etc.
-      const formattedNumber = new Intl.NumberFormat('en-IN').format(number);
+      
+      const formattedNumber = inrComma(n);
       return formattedNumber;
+      
     } else{
       //For other currencies, use the standard international number format
       //without converting the digits into words
-      const formattedNumber = new Intl.NumberFormat('en-US', {maximumFractionDigits:2}).format(number);
+      const formattedNumber = new Intl.NumberFormat('en-US', {maximumFractionDigits:2}).format(n);
       return formattedNumber;
     }
   }
@@ -171,9 +248,9 @@ function App() {
 
     // Denominations based on currency
     const denominations = {
-        usd: ['', ' Thousand', ' Million', ' Billion', ' Trillion', ' Quadrillion', ' Quintillion', ' Sextillion', ' Septillion', ' Octillion', ' Nonillion', ' Decillion', ' Undecillion', ' Duodecillion', ' Tredecillion', ' Quattuordecillion', ' Quindecillion', ' Sexdecillion', ' Septendecillion', ' Octodecillion', ' Novemdecillion', ' Vigintillion'],
-        gbp: ['', ' Thousand', ' Million', ' Billion', ' Trillion', ' Quadrillion', ' Quintillion', ' Sextillion', ' Septillion', ' Octillion', ' Nonillion', ' Decillion', ' Undecillion', ' Duodecillion', ' Tredecillion', ' Quattuordecillion', ' Quindecillion', ' Sexdecillion', ' Septendecillion', ' Octodecillion', ' Novemdecillion', ' Vigintillion'],
-        eur: ['', ' Thousand', ' Million', ' Billion', ' Trillion', ' Quadrillion', ' Quintillion', ' Sextillion', ' Septillion', ' Octillion', ' Nonillion', ' Decillion', ' Undecillion', ' Duodecillion', ' Tredecillion', ' Quattuordecillion', ' Quindecillion', ' Sexdecillion', ' Septendecillion', ' Octodecillion', ' Novemdecillion', ' Vigintillion'],
+        usd: ['', ' Thousand', ' Million', ' Billion', ' Trillion', ' Quadrillion', ' Quintillion',],
+        gbp: ['', ' Thousand', ' Million', ' Billion', ' Trillion', ' Quadrillion', ' Quintillion',],
+        eur: ['', ' Thousand', ' Million', ' Billion', ' Trillion', ' Quadrillion', ' Quintillion',],
     };
 
     // Handle the integer part
@@ -237,19 +314,19 @@ function App() {
   
       const lakhCrore = Math.floor(n / 100000000000);
       if (lakhCrore > 0) {
-          out += lakhCrore + " lakh crore ";
+          out += lakhCrore + "";
           n %= 100000000000;
       }
     
       const thousandCrore = Math.floor(n / 10000000000);
       if (thousandCrore > 0) {
-          out += thousandCrore + " thousand crore ";
+          out += thousandCrore + "";
           n %= 10000000000;
       }
     
       const hundredCrore = Math.floor(n / 1000000000);
       if (hundredCrore > 0) {
-          out += hundredCrore + " hundred crore ";
+          out += hundredCrore + "";
           n %= 1000000000;
       }
     
@@ -292,7 +369,7 @@ function App() {
       return result.trim();
   }
 
-  // Comma format
+  // expansion format
   function formatExpansion(number, currency) {
     //Check if the currency is INR (Indian Rupees)
     if(currency === 'inr') {
@@ -329,11 +406,7 @@ function App() {
   const formattedComma = formatComma(output, to);
   const formattedExpand = formatExpansion(output,to);
   const commaDenominations = extractDenominations(formattedExpand);
-
-  
-
   const conversionRates = currentRates();
-  
 
   // Render JSX
   return(
