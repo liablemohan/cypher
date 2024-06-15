@@ -306,13 +306,19 @@ function App() {
 
   //To give the bar to denomination format
   function extractDenominations(inputString){
-    //Remove all digits
-    let noDigits = inputString.replace(/\d/g, '');
-    //Replace multiple spaces with a single space
-    let cleanedString = noDigits.replace(/\s+/g, '  ').trim();
+    //Split the input string by spaces
+    const parts = inputString.split(' ');
 
-    //Return the cleaned string array
-    return cleanedString;
+    //Initialize an array to store extracted denominations
+    const extractedDenominations = [];
+
+    //Iterate through the parts to extract denominations
+    for(let i = 1; i < parts.length; i +=2) {
+      extractedDenominations.push(parts[i]);
+    }
+
+    //Return the extracted denominations array
+    return extractedDenominations.join(' ');
   }
 
   //To display current unit rates
